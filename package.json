@@ -1,9 +1,10 @@
 {
   "name": "wine-db",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Implementation of a wine database with nodeJS and mongoDB.",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
