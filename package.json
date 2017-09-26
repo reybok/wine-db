@@ -1,0 +1,29 @@
+{
+  "name": "wine-db",
+  "version": "1.0.0",
+  "description": "Implementation of a wine database with nodeJS and mongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reybok/wine-db.git"
+  },
+  "keywords": [
+    "wine",
+    "db",
+    "mongodb",
+    "nodejs",
+    "casestudy"
+  ],
+  "author": "Jakob Niemeyer",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/reybok/wine-db/issues"
+  },
+  "homepage": "https://github.com/reybok/wine-db#readme",
+  "dependencies": {
+    "restify": "^6.0.1"
+  }
+}
