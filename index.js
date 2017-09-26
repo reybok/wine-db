@@ -22,14 +22,14 @@ server.listen(config.port, () => {
               process.exit(1);
           }
 
-          // require('./routes')({ db, server });
+          require('./routes/index')({db, server});
 
           console.log(
-              '%s v%s ready to accept connections'+
-              'on port %s in %s environment.',
+              '%s v%s ready to accept connections '+
+              'on %s in %s environment.',
               server.name,
               config.version,
-              config.port,
+              server.url,
               config.env
           );
   });
