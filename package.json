@@ -1,6 +1,6 @@
 {
   "name": "wine-db",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Implementation of a wine database with nodeJS and mongoDB.",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,8 @@
   "homepage": "https://github.com/reybok/wine-db#readme",
   "dependencies": {
     "mongodb": "^2.2.31",
-    "restify": "^6.0.1"
+    "restify": "^6.0.1",
+    "restify-errors": "^5.0.0"
   },
   "devDependencies": {
     "eslint": "^4.7.2",
