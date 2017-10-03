@@ -23,14 +23,9 @@ module.exports = function(context) {
             );
         }
 
-        let data = Object.assign({}, req.body);
-
-        collection.insertOne(data)
+        collection.insert(req.body)
             .then((doc) => {
-                let data = Object.assign({}, doc.ops[0]);
-                data.id = data._id;
-                data._id = {};
-                res.send(200, data);
+                res.send(200, doc.ops[0]);
             })
             .catch((err) => res.send(500, err));
 

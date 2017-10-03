@@ -1,6 +1,8 @@
+'use strict';
+
 module.exports = {
     name: 'wine-db',
-    version: '0.0.2',
+    version: '0.0.3',
     env: process.env.NODE_ENV || 'development',
     port: process.env.PORT || 3000,
     db: {
