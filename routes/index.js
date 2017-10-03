@@ -2,51 +2,46 @@
 
 const errors = require('restify-errors');
 
-module.exports = function(context) {
-    const server = context.server;
-    const db = context.db;
+const Wine = require('../models/wine');
 
-    const collection = db.collection('wines');
-
+module.exports = function(server) {
     server.get('/wines/', (req, res, next) => {
-        collection.find().toArray()
-            .then((wines) => res.send(200, wines))
-            .catch((err) => res.send(500, err));
+      Wine.find()
+        .then((wines) => res.send(200, wines))
+        .catch((err) => res.send(500, err));
 
-        next();
+      next();
     });
 
     server.post('/wines/', (req, res, next) => {
-        if (!req.is('json')) {
-            return next(
-                new errors.InvalidContentError('\'application/json\' expected!')
-            );
-        }
+      if (!req.is('json')) {
+        return next(
+          new errors.InvalidContentError('\'application/json\' expected!')
+        );
+      }
 
-        collection.insert(req.body)
-            .then((doc) => {
-                res.send(200, doc.ops[0]);
-            })
-            .catch((err) => res.send(500, err));
+      Wine.create(req.body)
+        .then((doc) => res.send(200, doc))
+        .catch((err) => res.send(500, err));
 
-        next();
+      next();
     });
 
     server.put('/wines/:id', (req, res, next) => {
-        next();
+      next();
     });
 
     server.get('/wines/:id', (req, res, next) => {
-        next();
+      next();
     });
 
     server.del('/wines/:id', (req, res, next) => {
-        next();
+      next();
     });
 
     server.del('/dev/deleteAll/', (req, res, next) => {
-        collection.remove({})
-            .then((success) => res.send(204))
-            .catch((err) => res.send(500, err));
+      Wine.remove()
+        .then((removed) => res.send(204))
+        .catch((err) => res.send(500, err));
     });
 };

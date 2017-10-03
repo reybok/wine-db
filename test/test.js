@@ -7,6 +7,8 @@ process.env.MONGODB_URI = 'mongodb://127.0.0.1:27017/api-test';
 const request = require('superagent');
 const expect = require('expect.js');
 
+const Wine = require('../models/wine');
+
 describe('API', function() {
   const PATH = 'localhost:'+process.env.PORT;
   let server = undefined;
@@ -36,33 +38,25 @@ describe('API', function() {
       },
     ];
 
-    before(function(done) {
-      request
-        .post(PATH+'/wines')
-        .set('accept', 'application/json')
-        .type('json')
-        .send(JSON.stringify(content))
-        .end((err, res) => {
-          if (err) console.log(err);
-          done();
-        });
-    });
-
-    it('should return all documents', function(done) {
-      request
-        .get(PATH+'/wines')
-        .then((res) => {
-          expect(res).to.exist;
-          expect(res.status).to.equal(200);
-          expect(res.body).to.have.length(2);
-          expect(res.body).to.eql(content);
-          done();
+    it('should GET all wines in the database', function(done) {
+      Wine.create(content)
+        .then((success) => {
+          request
+            .get(PATH+'/wines')
+            .then((res) => {
+              expect(res).to.exist;
+              expect(res.status).to.equal(200);
+              expect(res.body).to.have.length(2);
+              expect(res.body).to.eql(content);
+              done();
+            })
+            .catch((err) => done(err));
         })
         .catch((err) => done(err));
     });
 
     after(function(done) {
-      server.clear(done);
+      Wine.remove(done);
     });
   });
   describe('POST/wines', function() {
@@ -79,6 +73,6 @@ describe('API', function() {
   });
 
   after(function(done) {
-    server.stop(done);
+    server.close(done);
   });
 });

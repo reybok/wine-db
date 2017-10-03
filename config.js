@@ -2,7 +2,7 @@
 
 module.exports = {
     name: 'wine-db',
-    version: '0.0.3',
+    version: '0.1.0',
     env: process.env.NODE_ENV || 'development',
     port: process.env.PORT || 3000,
     db: {
