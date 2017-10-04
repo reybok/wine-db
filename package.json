@@ -1,0 +1,40 @@
+{
+  "name": "wine-db",
+  "version": "0.1.5",
+  "description": "Implementation of a wine database with nodeJS and mongoDB.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "pretest": "./node_modules/.bin/eslint .",
+    "test": "mocha --timeout=5000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reybok/wine-db.git"
+  },
+  "keywords": [
+    "wine",
+    "db",
+    "mongodb",
+    "nodejs",
+    "casestudy"
+  ],
+  "author": "Jakob Niemeyer",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/reybok/wine-db/issues"
+  },
+  "homepage": "https://github.com/reybok/wine-db#readme",
+  "dependencies": {
+    "mongoose": "^4.12.0",
+    "restify": "^6.0.1",
+    "restify-errors": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.7.2",
+    "eslint-config-google": "^0.9.1",
+    "expect.js": "^0.3.1",
+    "mocha": "^4.0.0",
+    "superagent": "^3.6.2"
+  }
+}
