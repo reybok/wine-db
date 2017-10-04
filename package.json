@@ -1,6 +1,6 @@
 {
   "name": "wine-db",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "Implementation of a wine database with nodeJS and mongoDB.",
   "main": "index.js",
   "scripts": {
