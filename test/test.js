@@ -63,6 +63,66 @@ describe('API', function() {
           });
       });
     });
+    it('should GET and filter wines by \'name\'', function(done) {
+      createContent(content, done, () => {
+        request
+          .get(PATH+'/wines')
+          .query({name: 'Rießling'})
+          .end((err, res) => {
+            expect(res).to.exist;
+            expect(res.status).to.equal(200);
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.eql(content[1]);
+            done();
+          });
+      });
+    });
+    it('should GET and filter wines by \'year\'', function(done) {
+      createContent(content, done, () => {
+        request
+          .get(PATH+'/wines')
+          .query({year: 2013})
+          .end((err, res) => {
+            expect(res).to.exist;
+            expect(res.status).to.equal(200);
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.eql(content[0]);
+            done();
+          });
+      });
+    });
+    it('should GET and filter wines by \'type\'', function(done) {
+      createContent(content, done, () => {
+        request
+          .get(PATH+'/wines')
+          .query({type: 'white'})
+          .end((err, res) => {
+            expect(res).to.exist;
+            expect(res.status).to.equal(200);
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.eql(content[1]);
+            done();
+          });
+      });
+    });
+    it('should GET and filter wines by \'country\'', function(done) {
+      createContent(content, done, () => {
+        request
+          .get(PATH+'/wines')
+          .query({country: 'France'})
+          .end((err, res) => {
+            expect(res).to.exist;
+            expect(res.status).to.equal(200);
+            expect(res.body).to.be.an('array');
+            expect(res.body).to.have.length(1);
+            expect(res.body[0]).to.eql(content[0]);
+            done();
+          });
+      });
+    });
 
     afterEach(function(done) {
       Wine.remove(done);
@@ -263,7 +323,30 @@ describe('API', function() {
           });
       });
     });
-
+    it('should not UPDATE if new \'year\' is invalid', function(done) {
+      createContent(content, done, () => {
+        request
+          .put(PATH+'/wines/'+content._id)
+          .send({year: 'Zweitausendelf'})
+          .end((err, res) => {
+            expect(res).to.exist;
+            expect(res.status).to.equal(400);
+            done();
+          });
+      });
+    });
+    it('should not UPDATE if new \'type\' is invalid', function(done) {
+      createContent(content, done, () => {
+        request
+          .put(PATH+'/wines/'+content._id)
+          .send({type: 'blue'})
+          .end((err, res) => {
+            expect(res).to.exist;
+            expect(res.status).to.equal(400);
+            done();
+          });
+      });
+    });
     it('should UPDATE and return document', function(done) {
       let update = {
         name: 'Das Update',
@@ -397,12 +480,6 @@ describe('API', function() {
   });
 });
 
-/**
- * Fills the test database with the provided content and checks count.
- * @param {Object} content
- * @param {function} done used for error handling
- * @param {function} callback run after filling the database
- */
 function createContent(content, done, callback) {
   content = [].concat(content);
   Wine.count({}).then((count) => {

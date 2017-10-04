@@ -8,8 +8,9 @@ module.exports = function(server) {
     server.get('/wines/', (req, res, next) => {
       let order = req.params.order ? (req.params.order < 0 ? -1 : 1) : 1;
       let sort = req.params.sort ? {[req.params.sort]: order} : undefined;
+      let query = parseQuery(req.params);
 
-      Wine.find().sort(sort)
+      Wine.find(query).sort(sort)
         .then((wines) => res.send(200, wines))
         .catch((err) => res.send(500, err));
 
@@ -67,3 +68,23 @@ module.exports = function(server) {
       next();
     });
 };
+
+function parseQuery(params) {
+  let regex = params.regex === 'true' || params.regex == 1;
+
+  let query = {};
+  if (params.year) query.year = regex ? {$gte: params.year} : params.year;
+
+  if (params.name) {
+    query.name = regex ? {$regex: params.name, $options: 'i'} : params.name;
+  }
+  if (params.type) {
+    query.type = regex ? {$regex: params.type, $options: 'i'} : params.type;
+  }
+  if (params.country) {
+    query.country = regex ?
+      {$regex: params.country, $options: 'i'} : params.country;
+  }
+
+  return query;
+}
