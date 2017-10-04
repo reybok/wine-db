@@ -41,7 +41,7 @@ module.exports = (config, callback=undefined) => {
       })
       .catch((err) => {
         console.error('An error occurred while '+
-          'attempting to connect to MongoDB', error);
+          'attempting to connect to MongoDB:\n', err.message);
         process.exit(1);
       });
 
