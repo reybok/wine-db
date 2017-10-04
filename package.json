@@ -1,11 +1,12 @@
 {
   "name": "wine-db",
-  "version": "0.1.0",
+  "version": "0.1.4",
   "description": "Implementation of a wine database with nodeJS and mongoDB.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "./node_modules/.bin/eslint --fix ."
+    "pretest": "./node_modules/.bin/eslint .",
+    "test": "mocha --timeout=5000"
   },
   "repository": {
     "type": "git",

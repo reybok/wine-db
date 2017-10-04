@@ -22,20 +22,37 @@ module.exports = function(server) {
 
       Wine.create(req.body)
         .then((doc) => res.send(200, doc))
-        .catch((err) => res.send(500, err));
+        .catch((err) => res.send(400, err));
 
       next();
     });
 
     server.put('/wines/:id', (req, res, next) => {
+      let options = {
+      /* return */new: true,
+        runValidators: true,
+      };
+
+      Wine.findByIdAndUpdate(req.params.id, req.body, options)
+        .then((doc) => res.send(200, doc))
+        .catch((err) => res.send(400, err));
+
       next();
     });
 
     server.get('/wines/:id', (req, res, next) => {
+      Wine.findById(req.params.id)
+        .then((doc) => res.send(200, doc))
+        .catch((err) => res.send(400, err));
+
       next();
     });
 
     server.del('/wines/:id', (req, res, next) => {
+      Wine.findByIdAndRemove(req.params.id)
+        .then((doc) => res.send(200, {success: true}))
+        .catch((err) => res.send(400, err));
+
       next();
     });
 
@@ -43,5 +60,7 @@ module.exports = function(server) {
       Wine.remove()
         .then((removed) => res.send(204))
         .catch((err) => res.send(500, err));
+
+      next();
     });
 };
