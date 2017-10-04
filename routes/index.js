@@ -6,7 +6,10 @@ const Wine = require('../models/wine');
 
 module.exports = function(server) {
     server.get('/wines/', (req, res, next) => {
-      Wine.find()
+      let order = req.params.order ? (req.params.order < 0 ? -1 : 1) : 1;
+      let sort = req.params.sort ? {[req.params.sort]: order} : undefined;
+
+      Wine.find().sort(sort)
         .then((wines) => res.send(200, wines))
         .catch((err) => res.send(500, err));
 
