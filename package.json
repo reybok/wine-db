@@ -26,15 +26,15 @@
   },
   "homepage": "https://github.com/reybok/wine-db#readme",
   "dependencies": {
-    "mongoose": "^4.12.0",
-    "restify": "^6.0.1",
+    "mongoose": "^4.13.11",
+    "restify": "^6.3.4",
     "restify-errors": "^5.0.0"
   },
   "devDependencies": {
-    "eslint": "^4.7.2",
+    "eslint": "^4.18.2",
     "eslint-config-google": "^0.9.1",
     "expect.js": "^0.3.1",
-    "mocha": "^4.0.0",
-    "superagent": "^3.6.2"
+    "mocha": "^4.1.0",
+    "superagent": "^3.8.2"
   }
 }
